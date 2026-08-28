@@ -1,16 +1,10 @@
-const express = require('express');
-const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const serverless = require('serverless-http');
-
-const app = express();
-app.use(cors());
-app.use(express.json({ limit: '10mb' }));
 
 const USER_AGENTS = [
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36',
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
 ];
 
 function getRandomUserAgent() {
@@ -188,18 +182,43 @@ function extractMetaData($, baseUrl) {
   };
 }
 
-const scrapeHandler = async (req, res) => {
-  const { url, mode = 'auto' } = req.body || {};
-  if (!url || typeof url !== 'string') {
-    return res.status(400).json({ error: 'Valid URL is required' });
+exports.handler = async (event, context) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' };
   }
 
-  let formattedUrl = url.trim();
-  if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
-    formattedUrl = 'https://' + formattedUrl;
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      headers,
+      body: JSON.stringify({ error: 'Method Not Allowed' })
+    };
   }
 
   try {
+    const body = JSON.parse(event.body || '{}');
+    const { url } = body;
+
+    if (!url || typeof url !== 'string') {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Valid URL is required' })
+      };
+    }
+
+    let formattedUrl = url.trim();
+    if (!formattedUrl.startsWith('http://') && !formattedUrl.startsWith('https://')) {
+      formattedUrl = 'https://' + formattedUrl;
+    }
+
     const userAgent = getRandomUserAgent();
     const response = await axios.get(formattedUrl, {
       headers: {
@@ -208,8 +227,7 @@ const scrapeHandler = async (req, res) => {
         'Accept-Language': 'en-US,en;q=0.9',
         'Cache-Control': 'no-cache'
       },
-      timeout: 20000,
-      maxRedirects: 5
+      timeout: 15000
     });
 
     const html = response.data;
@@ -237,19 +255,20 @@ const scrapeHandler = async (req, res) => {
       }
     };
 
-    return res.json(outputJson);
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify(outputJson)
+    };
 
   } catch (error) {
-    return res.status(500).json({
-      status: 'error',
-      error: error.message,
-      source_url: formattedUrl
-    });
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({
+        status: 'error',
+        error: error.message || 'Scraping failed'
+      })
+    };
   }
 };
-
-app.post('/api/scrape', scrapeHandler);
-app.post('/scrape', scrapeHandler);
-app.post('*', scrapeHandler);
-
-module.exports.handler = serverless(app);
