@@ -2,10 +2,8 @@
   publish = "public"
   functions = "netlify/functions"
 
-[[redirects]]
-  from = "/api/scrape"
-  to = "/.netlify/functions/api"
-  status = 200
+[functions]
+  node_bundler = "esbuild"
 
 [[redirects]]
   from = "/api/*"
