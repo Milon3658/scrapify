@@ -29,6 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentScrapedData = null;
 
+  // FAQ Accordions Toggle
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isHidden = answer.classList.contains('hidden');
+      
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.textContent = '+');
+
+      if (isHidden) {
+        answer.classList.remove('hidden');
+        icon.textContent = '−';
+      }
+    });
+  });
+
   clearBtn.addEventListener('click', () => {
     targetUrlInput.value = '';
     targetUrlInput.focus();

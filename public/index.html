@@ -3,11 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scrapify - Web Data Collector & JSON Extractor</title>
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Scrapify | Free Web Scraper & E-Commerce to JSON Extractor Online</title>
+  <meta name="description" content="Instantly convert any website URL, Amazon item, or e-commerce category into structured JSON. Extract product titles, prices, ratings, images, and category grids free online.">
+  <meta name="keywords" content="web scraper online, website to json converter, extract amazon product data json, ecommerce category scraper, html to json, cheerio scraper, free json extractor">
+  <meta name="author" content="Scrapify">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://scrapifyapp-milon.netlify.app/">
+
+  <!-- OpenGraph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scrapifyapp-milon.netlify.app/">
+  <meta property="og:title" content="Scrapify | Free Web Scraper & E-Commerce to JSON Extractor">
+  <meta property="og:description" content="Extract product details, prices, images, and category listings into clean JSON with one click. Free web data collection tool.">
+  <meta property="og:image" content="https://scrapifyapp-milon.netlify.app/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://scrapifyapp-milon.netlify.app/">
+  <meta name="twitter:title" content="Scrapify | Free Web Scraper & E-Commerce to JSON Extractor">
+  <meta name="twitter:description" content="Extract product details, prices, images, and category listings into clean JSON with one click.">
+
+  <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Schema.org WebApplication Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Scrapify",
+    "url": "https://scrapifyapp-milon.netlify.app",
+    "description": "Convert website links, e-commerce categories, and HTML tables into structured JSON format online.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Schema.org FAQPage Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I extract e-commerce category products to JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste your category URL (e.g. Arogga, Shopify collection, or Amazon category) into Scrapify, select Category Listing mode, and click Scrapify Now. All products on the page will be extracted into a structured JSON array."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Scrapify free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Scrapify is 100% free to use online with no login or credit card required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export scraped data to CSV?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! You can copy the JSON data directly to your clipboard, download it as a .json file, or export extracted category products as a CSV spreadsheet."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="app-container">
@@ -134,7 +208,82 @@
         </div>
       </section>
 
-      <!-- History Sidebar / Log -->
+      <!-- Use Cases & SEO Feature Cards -->
+      <section class="usecases-section">
+        <h2 class="section-title">What Can You Scrape with Scrapify?</h2>
+        <div class="usecases-grid">
+          <div class="usecase-card">
+            <div class="usecase-icon">🛍️</div>
+            <h3>Multi-Product Categories</h3>
+            <p>Paste category links from e-commerce stores (Arogga, Shopify collections, eBay) to extract full product lists with prices and images.</p>
+          </div>
+          <div class="usecase-card">
+            <div class="usecase-icon">📦</div>
+            <h3>Amazon Product Pages</h3>
+            <p>Scrape single product details including ASIN, title, price, ratings, stock status, features, and specifications table.</p>
+          </div>
+          <div class="usecase-card">
+            <div class="usecase-icon">📊</div>
+            <h3>HTML Tables to CSV / JSON</h3>
+            <p>Convert website tables and lists into clean JSON arrays or downloadable CSV spreadsheets instantly.</p>
+          </div>
+          <div class="usecase-card">
+            <div class="usecase-icon">🔍</div>
+            <h3>Microdata & JSON-LD</h3>
+            <p>Automatically extract embedded JSON-LD schemas and Next.js / React application hydration state.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive FAQ Section (SEO Keywords) -->
+      <section class="faq-section card">
+        <div class="card-header">
+          <h2>Frequently Asked Questions (FAQ)</h2>
+        </div>
+        <div class="faq-accordion">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How do I extract e-commerce category products to JSON?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer hidden">
+              <p>Paste any category or catalog link (such as Arogga medicine listings, Shopify collections, or Amazon search results), select <strong>Category Listing</strong> mode, and click <strong>Scrapify Now</strong>. All product items will be extracted into a structured JSON array.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is Scrapify free to use?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer hidden">
+              <p>Yes, Scrapify is 100% free to use online with no login or credit card required.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I export scraped web data to CSV?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer hidden">
+              <p>Yes! You can copy the JSON data directly to your clipboard, download it as a <code>.json</code> file, or export extracted category products as a <code>.csv</code> spreadsheet.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Does Scrapify support Next.js and dynamic web apps?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer hidden">
+              <p>Yes! Scrapify includes built-in hydration parsers for <code>__NEXT_DATA__</code> and embedded Schema.org JSON-LD microdata.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Sidebar -->
       <section class="card history-card">
         <div class="card-header">
           <h3>

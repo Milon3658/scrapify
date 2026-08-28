@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://scrapifyapp-milon.netlify.app/sitemap.xml
