@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Product Scraper to JSON | Extract ASIN, Price, Ratings Free | Scrapify</title>
+  <meta name="description" content="Free Amazon product scraper online. Extract ASIN, title, price, ratings, images, features, and specs from any Amazon product page into clean JSON format instantly.">
+  <meta name="keywords" content="amazon product scraper, extract amazon product data json, amazon asin scraper, amazon price extractor, amazon product data free, amazon scraper online">
+  <meta name="author" content="Scrapify">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://scrapifyapp-milon.netlify.app/amazon-product-scraper.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scrapifyapp-milon.netlify.app/amazon-product-scraper.html">
+  <meta property="og:title" content="Amazon Product Scraper to JSON | Scrapify">
+  <meta property="og:description" content="Extract Amazon product details including ASIN, price, ratings, images into clean JSON free online.">
+  <meta property="og:image" content="https://scrapifyapp-milon.netlify.app/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://scrapifyapp-milon.netlify.app/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Scrapify Amazon Product Scraper",
+    "url": "https://scrapifyapp-milon.netlify.app/amazon-product-scraper.html",
+    "description": "Free online tool to extract Amazon product details including ASIN, title, price, ratings, and images into JSON format.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <style>
+    .lp-hero { background: linear-gradient(135deg, rgba(255,153,0,0.12) 0%, rgba(30,144,255,0.08) 100%); border: 1px solid rgba(255,153,0,0.2); border-radius: 20px; padding: 48px 40px; margin-bottom: 32px; text-align: center; }
+    .lp-hero h1 { font-size: 2.4rem; font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+    .lp-hero h1 span { color: #FF9900; }
+    .lp-hero p { color: #a0aec0; font-size: 1.1rem; max-width: 620px; margin: 0 auto 28px; }
+    .lp-cta { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #FF9900, #e67e00); color: #000; font-weight: 700; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .lp-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,153,0,0.4); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin: 32px 0; }
+    .feature-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; }
+    .feature-item .fi-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-item h3 { color: #e2e8f0; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-item p { color: #718096; font-size: 0.88rem; line-height: 1.6; }
+    .json-demo { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,153,0,0.2); border-radius: 14px; padding: 24px; font-family: 'Fira Code', monospace; font-size: 0.82rem; color: #e2e8f0; overflow-x: auto; margin: 24px 0; }
+    .json-demo .jk { color: #79c0ff; }
+    .json-demo .jv { color: #a5d6ff; }
+    .json-demo .js { color: #56d364; }
+    .json-demo .jn { color: #FF9900; }
+    .steps-list { list-style: none; padding: 0; counter-reset: steps; }
+    .steps-list li { counter-increment: steps; display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .steps-list li::before { content: counter(steps); background: linear-gradient(135deg, #FF9900, #e67e00); color: #000; font-weight: 700; font-size: 0.85rem; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .steps-list li p { color: #a0aec0; margin: 0; font-size: 0.9rem; }
+    .steps-list li strong { color: #e2e8f0; display: block; margin-bottom: 4px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 0.85rem; color: #718096; }
+    .breadcrumb a { color: #60a5fa; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .section-heading { font-size: 1.5rem; font-weight: 700; color: #e2e8f0; margin: 40px 0 20px; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+            <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Scrapify <span>Data Collector</span></h1>
+          <p class="tagline">Universal Web Scraper & JSON Extractor</p>
+        </div>
+      </div>
+      <a href="/" class="btn btn-secondary btn-sm">← Back to Scrapify</a>
+    </header>
+
+    <main class="main-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <span>Amazon Product Scraper</span>
+      </nav>
+
+      <div class="lp-hero">
+        <h1>Free <span>Amazon Product</span> Scraper to JSON</h1>
+        <p>Extract ASIN, title, price, ratings, stock status, product images, features list, and specifications from any Amazon product page — instantly output as clean JSON.</p>
+        <a href="/" class="lp-cta">🛒 Try Amazon Scraper Free →</a>
+      </div>
+
+      <h2 class="section-heading">What Data Can You Extract from Amazon?</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="fi-icon">🏷️</div>
+          <h3>Product Title & ASIN</h3>
+          <p>Extract the full product name and Amazon Standard Identification Number (ASIN) from any product listing page.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">💰</div>
+          <h3>Price & Discounts</h3>
+          <p>Get current price, original price, discount percentage, and deal badge information in structured JSON.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">⭐</div>
+          <h3>Ratings & Reviews</h3>
+          <p>Scrape star rating score and total number of customer reviews with zero code required.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">📸</div>
+          <h3>Product Images</h3>
+          <p>Extract all high-resolution product image URLs from the image gallery carousel.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">📋</div>
+          <h3>Features & Bullet Points</h3>
+          <p>Get the complete product features bullet list as a clean JSON array.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">📦</div>
+          <h3>Stock & Availability</h3>
+          <p>Check if a product is In Stock, Limited Stock, or Out of Stock instantly.</p>
+        </div>
+      </div>
+
+      <h2 class="section-heading">Sample JSON Output</h2>
+      <div class="json-demo">
+        <span class="jk">{</span><br>
+        &nbsp;&nbsp;<span class="jk">"asin"</span>: <span class="js">"B08N5WRWNW"</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"title"</span>: <span class="js">"Echo Dot (4th Gen) Smart Speaker with Alexa"</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"price"</span>: <span class="js">"$29.99"</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"original_price"</span>: <span class="js">"$49.99"</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"discount"</span>: <span class="js">"40% off"</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"rating"</span>: <span class="jn">4.7</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"review_count"</span>: <span class="jn">612847</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"availability"</span>: <span class="js">"In Stock"</span>,<br>
+        &nbsp;&nbsp;<span class="jk">"images"</span>: [<span class="js">"https://m.media-amazon.com/..."</span>],<br>
+        &nbsp;&nbsp;<span class="jk">"features"</span>: [<span class="js">"Meets our climate pledge friendly"</span>, <span class="js">"..."</span>]<br>
+        <span class="jk">}</span>
+      </div>
+
+      <h2 class="section-heading">How to Scrape Amazon Products in 3 Steps</h2>
+      <ol class="steps-list">
+        <li>
+          <div>
+            <strong>Copy the Amazon Product URL</strong>
+            <p>Open any Amazon product page (e.g. https://www.amazon.com/dp/B08N5WRWNW) and copy the URL from your browser.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Paste into Scrapify & Select Mode</strong>
+            <p>Paste the URL into Scrapify, select "Single Product Detail Page" mode from the dropdown, and click <strong>Scrapify Now</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Download JSON or Export CSV</strong>
+            <p>Instantly view the extracted product data as formatted JSON, copy it, or download it as a .json or .csv file.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div style="text-align:center; margin: 48px 0;">
+        <a href="/" class="lp-cta">🚀 Start Scraping Amazon Products Free →</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

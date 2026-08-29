@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arogga Medicine Category Scraper | Extract All Products to JSON Free | Scrapify</title>
+  <meta name="description" content="Scrape Arogga medicine category pages and extract all product names, prices, images, and details into structured JSON or CSV. Free online tool — no coding required.">
+  <meta name="keywords" content="arogga scraper, arogga medicine category scraper, arogga product list json, arogga data extractor, bangladesh pharmacy scraper, arogga category products json">
+  <meta name="author" content="Scrapify">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://scrapifyapp-milon.netlify.app/arogga-medicine-scraper.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scrapifyapp-milon.netlify.app/arogga-medicine-scraper.html">
+  <meta property="og:title" content="Arogga Medicine Category Scraper to JSON | Scrapify">
+  <meta property="og:description" content="Extract all Arogga medicine listings, prices, and product details into clean JSON instantly. Free online scraper.">
+  <meta property="og:image" content="https://scrapifyapp-milon.netlify.app/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://scrapifyapp-milon.netlify.app/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Scrapify Arogga Medicine Scraper",
+    "url": "https://scrapifyapp-milon.netlify.app/arogga-medicine-scraper.html",
+    "description": "Free online tool to extract Arogga medicine category product listings into JSON and CSV format without coding.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <style>
+    .lp-hero { background: linear-gradient(135deg, rgba(0,200,120,0.12) 0%, rgba(30,144,255,0.08) 100%); border: 1px solid rgba(0,200,120,0.2); border-radius: 20px; padding: 48px 40px; margin-bottom: 32px; text-align: center; }
+    .lp-hero h1 { font-size: 2.4rem; font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+    .lp-hero h1 span { color: #00c878; }
+    .lp-hero p { color: #a0aec0; font-size: 1.1rem; max-width: 620px; margin: 0 auto 28px; }
+    .lp-cta { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #00c878, #00a060); color: #000; font-weight: 700; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .lp-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,200,120,0.4); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin: 32px 0; }
+    .feature-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; }
+    .feature-item .fi-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-item h3 { color: #e2e8f0; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .feature-item p { color: #718096; font-size: 0.88rem; line-height: 1.6; }
+    .json-demo { background: rgba(0,0,0,0.4); border: 1px solid rgba(0,200,120,0.2); border-radius: 14px; padding: 24px; font-family: 'Fira Code', monospace; font-size: 0.82rem; color: #e2e8f0; overflow-x: auto; margin: 24px 0; }
+    .json-demo .jk { color: #79c0ff; }
+    .json-demo .jv { color: #a5d6ff; }
+    .json-demo .js { color: #56d364; }
+    .json-demo .jn { color: #00c878; }
+    .steps-list { list-style: none; padding: 0; counter-reset: steps; }
+    .steps-list li { counter-increment: steps; display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .steps-list li::before { content: counter(steps); background: linear-gradient(135deg, #00c878, #00a060); color: #000; font-weight: 700; font-size: 0.85rem; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .steps-list li p { color: #a0aec0; margin: 0; font-size: 0.9rem; }
+    .steps-list li strong { color: #e2e8f0; display: block; margin-bottom: 4px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 0.85rem; color: #718096; }
+    .breadcrumb a { color: #60a5fa; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .section-heading { font-size: 1.5rem; font-weight: 700; color: #e2e8f0; margin: 40px 0 20px; }
+    .category-pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+    .category-pill { background: rgba(0,200,120,0.1); border: 1px solid rgba(0,200,120,0.3); color: #00c878; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+            <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Scrapify <span>Data Collector</span></h1>
+          <p class="tagline">Universal Web Scraper & JSON Extractor</p>
+        </div>
+      </div>
+      <a href="/" class="btn btn-secondary btn-sm">← Back to Scrapify</a>
+    </header>
+
+    <main class="main-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span>›</span> <span>Arogga Medicine Scraper</span>
+      </nav>
+
+      <div class="lp-hero">
+        <h1>Free <span>Arogga Medicine</span> Category Scraper</h1>
+        <p>Extract all medicine names, prices, brand info, images, and product links from any Arogga category page into structured JSON — no coding needed.</p>
+        <a href="/" class="lp-cta">💊 Try Arogga Scraper Free →</a>
+      </div>
+
+      <h2 class="section-heading">Supported Arogga Categories</h2>
+      <div class="category-pills">
+        <span class="category-pill">💊 Medicines</span>
+        <span class="category-pill">🧴 Skin Care</span>
+        <span class="category-pill">💪 Vitamins & Supplements</span>
+        <span class="category-pill">👶 Baby Care</span>
+        <span class="category-pill">🌿 Herbal Products</span>
+        <span class="category-pill">🦷 Dental Care</span>
+        <span class="category-pill">🏥 Medical Devices</span>
+        <span class="category-pill">🧘 Health Foods</span>
+      </div>
+
+      <h2 class="section-heading">What Data Gets Extracted?</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="fi-icon">💊</div>
+          <h3>Product Name & Brand</h3>
+          <p>Extract full medicine name, generic name, and brand/manufacturer details for every product in the category listing.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">💰</div>
+          <h3>Price & MRP</h3>
+          <p>Get selling price, maximum retail price, and discount percentage for all medicines in the category.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">🖼️</div>
+          <h3>Product Images</h3>
+          <p>Extract thumbnail and full-size product image URLs for all items in the listing page.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">🔗</div>
+          <h3>Product Page Links</h3>
+          <p>Get direct links to each product's detail page for further data extraction or inventory tracking.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">📦</div>
+          <h3>Pack Size & Form</h3>
+          <p>Extract pack size (tablet count, ml, gm) and dosage form from structured product data.</p>
+        </div>
+        <div class="feature-item">
+          <div class="fi-icon">📊</div>
+          <h3>Export to CSV</h3>
+          <p>Download all extracted medicine data as a CSV spreadsheet for price comparison or inventory management.</p>
+        </div>
+      </div>
+
+      <h2 class="section-heading">Sample JSON Output (Arogga Category)</h2>
+      <div class="json-demo">
+        <span class="jk">[</span><br>
+        &nbsp;&nbsp;<span class="jk">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"name"</span>: <span class="js">"Napa 500mg Tablet"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"brand"</span>: <span class="js">"Beximco Pharmaceuticals"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"price"</span>: <span class="js">"৳ 1.50"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"mrp"</span>: <span class="js">"৳ 2.00"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"discount"</span>: <span class="js">"25%"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"image"</span>: <span class="js">"https://arogga.com/images/..."</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">"url"</span>: <span class="js">"https://www.arogga.com/product/..."</span><br>
+        &nbsp;&nbsp;<span class="jk">}</span>,<br>
+        &nbsp;&nbsp;<span class="jk">{ "..." }</span><br>
+        <span class="jk">]</span> <span style="color:#718096">// 57 products extracted</span>
+      </div>
+
+      <h2 class="section-heading">How to Scrape Arogga in 3 Steps</h2>
+      <ol class="steps-list">
+        <li>
+          <div>
+            <strong>Go to any Arogga category page</strong>
+            <p>Example: <code style="color:#00c878">https://www.arogga.com/category-home/medicines</code></p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Paste URL into Scrapify & choose Category Listing mode</strong>
+            <p>Select "Category Listing (Extracts All Products)" from the mode dropdown and click Scrapify Now.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Get structured JSON with all products</strong>
+            <p>All products on the category page are extracted into a clean JSON array. Download as JSON or export to CSV.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div style="text-align:center; margin: 48px 0;">
+        <a href="/" class="lp-cta">🚀 Scrape Arogga Category Free →</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
