@@ -79,8 +79,8 @@ body {
   box-shadow: 0 4px 14px var(--accent-glow);
 }
 
-.brand h1 { font-size: 1.4rem; font-weight: 700; }
-.brand h1 span {
+.brand-title { font-size: 1.4rem; font-weight: 700; }
+.brand-title span {
   background: linear-gradient(90deg, var(--accent-primary), var(--accent-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -115,6 +115,39 @@ body {
 
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
 .card-header h2, .card-header h3 { font-size: 1.15rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+
+.tool-intro {
+  margin-bottom: 1.25rem;
+}
+
+.tool-intro h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.tool-intro p {
+  color: var(--text-secondary);
+  max-width: 760px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
 
 .badge {
   font-size: 0.75rem; font-weight: 600;
@@ -170,6 +203,38 @@ body {
 .btn-secondary { background: var(--bg-surface-elevated); color: var(--text-primary); border: 1px solid var(--border-color); }
 .btn-outline { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); }
 .btn-sm { padding: 0.45rem 0.85rem; font-size: 0.85rem; border-radius: var(--radius-sm); }
+
+.seo-hero {
+  padding: 3rem;
+  text-align: center;
+}
+
+.seo-kicker {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.seo-hero h1 {
+  font-size: 2.4rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.seo-hero p {
+  color: var(--text-secondary);
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+}
+
+.seo-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
 
 .demo-section { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
 .demo-label { font-size: 0.85rem; color: var(--text-muted); }

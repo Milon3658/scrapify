@@ -46,8 +46,8 @@
       property="og:image"
       content="https://scrapifyapp-milon.netlify.app/og-image.jpg"
     />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="1376" />
+    <meta property="og:image:height" content="768" />
     <meta property="og:site_name" content="Scrapify" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -139,6 +139,26 @@
             "@type": "HowToStep",
             "name": "Get structured JSON with all products",
             "text": "All products on the category page are extracted into a clean JSON array. Download as JSON or export to CSV."
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://scrapifyapp-milon.netlify.app/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Arogga Medicine Scraper",
+            "item": "https://scrapifyapp-milon.netlify.app/arogga-medicine-scraper.html"
           }
         ]
       }
@@ -385,7 +405,7 @@
             </svg>
           </div>
           <div>
-            <h1>Scrapify <span>Data Collector</span></h1>
+            <div class="brand-title">Scrapify <span>Data Collector</span></div>
             <p class="tagline">Universal Web Scraper & JSON Extractor</p>
           </div>
         </div>
