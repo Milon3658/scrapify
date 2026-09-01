@@ -1,180 +1,796 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopify Collection Product Scraper to JSON | Free Online | Scrapify</title>
-  <meta name="description" content="Scrape any Shopify collection or product listing page to JSON free. Extract all product titles, prices, variants, images and SKUs from Shopify store collections instantly.">
-  <meta name="keywords" content="shopify product scraper, shopify collection scraper, extract shopify products json, shopify store data extractor, shopify catalog scraper, shopify product list json free">
-  <meta name="author" content="Scrapify">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://scrapifyapp-milon.netlify.app/shopify-collection-scraper.html">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://scrapifyapp-milon.netlify.app/shopify-collection-scraper.html">
-  <meta property="og:title" content="Shopify Collection Product Scraper to JSON | Scrapify">
-  <meta property="og:description" content="Extract all Shopify collection products including variants, prices, and images into clean JSON free online.">
-  <meta property="og:image" content="https://scrapifyapp-milon.netlify.app/og-image.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://scrapifyapp-milon.netlify.app/og-image.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Scrapify Shopify Collection Scraper",
-    "url": "https://scrapifyapp-milon.netlify.app/shopify-collection-scraper.html",
-    "description": "Free online Shopify product and collection scraper. Extracts product listings, variants, images, and prices into JSON or CSV without coding.",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "All",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
-  }
-  </script>
-  <style>
-    .lp-hero { background: linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(239,68,68,0.06) 100%); border: 1px solid rgba(249,115,22,0.2); border-radius: 20px; padding: 48px 40px; margin-bottom: 32px; text-align: center; }
-    .lp-hero h1 { font-size: 2.4rem; font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.2; }
-    .lp-hero h1 span { color: #fb923c; }
-    .lp-hero p { color: #a0aec0; font-size: 1.1rem; max-width: 620px; margin: 0 auto 28px; }
-    .lp-cta { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
-    .lp-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(249,115,22,0.4); }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin: 32px 0; }
-    .feature-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px; }
-    .feature-item .fi-icon { font-size: 2rem; margin-bottom: 12px; }
-    .feature-item h3 { color: #e2e8f0; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
-    .feature-item p { color: #718096; font-size: 0.88rem; line-height: 1.6; }
-    .json-demo { background: rgba(0,0,0,0.4); border: 1px solid rgba(249,115,22,0.2); border-radius: 14px; padding: 24px; font-family: 'Fira Code', monospace; font-size: 0.82rem; color: #e2e8f0; overflow-x: auto; margin: 24px 0; }
-    .json-demo .jk { color: #79c0ff; }
-    .json-demo .js { color: #56d364; }
-    .json-demo .jn { color: #fb923c; }
-    .steps-list { list-style: none; padding: 0; counter-reset: steps; }
-    .steps-list li { counter-increment: steps; display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .steps-list li::before { content: counter(steps); background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; font-weight: 700; font-size: 0.85rem; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-    .steps-list li p { color: #a0aec0; margin: 0; font-size: 0.9rem; }
-    .steps-list li strong { color: #e2e8f0; display: block; margin-bottom: 4px; }
-    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 0.85rem; color: #718096; }
-    .breadcrumb a { color: #60a5fa; text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .section-heading { font-size: 1.5rem; font-weight: 700; color: #e2e8f0; margin: 40px 0 20px; }
-    .tip-box { background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.25); border-radius: 12px; padding: 20px 24px; margin: 24px 0; display: flex; gap: 14px; align-items: flex-start; }
-    .tip-box .tip-icon { font-size: 1.4rem; margin-top: 2px; }
-    .tip-box p { color: #a0aec0; margin: 0; font-size: 0.9rem; line-height: 1.7; }
-    .tip-box strong { color: #fb923c; }
-  </style>
-</head>
-<body>
-  <div class="app-container">
-    <header class="app-header">
-      <div class="brand">
-        <div class="logo-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
-            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
-            <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
-          </svg>
-        </div>
-        <div>
-          <h1>Scrapify <span>Data Collector</span></h1>
-          <p class="tagline">Universal Web Scraper & JSON Extractor</p>
-        </div>
-      </div>
-      <a href="/" class="btn btn-secondary btn-sm">← Back to Scrapify</a>
-    </header>
-
-    <main class="main-content">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a> <span>›</span> <span>Shopify Collection Scraper</span>
-      </nav>
-
-      <div class="lp-hero">
-        <h1>Free <span>Shopify Collection</span> Product Scraper</h1>
-        <p>Extract all products from any Shopify collection or catalog page into clean, structured JSON. Get product names, prices, variants, SKUs, and images — instantly, for free.</p>
-        <a href="/" class="lp-cta">🛍️ Try Shopify Scraper Free →</a>
-      </div>
-
-      <div class="tip-box">
-        <div class="tip-icon">💡</div>
-        <p><strong>Pro Tip:</strong> Most Shopify stores expose a built-in JSON endpoint at <code>/collections/[name]/products.json</code>. Scrapify auto-detects and uses this for maximum data extraction accuracy when available.</p>
-      </div>
-
-      <h2 class="section-heading">What Data Gets Extracted from Shopify Collections?</h2>
-      <div class="features-grid">
-        <div class="feature-item">
-          <div class="fi-icon">🏷️</div>
-          <h3>Product Title & Handle</h3>
-          <p>Get the full product name and URL-safe handle (slug) for every product in the Shopify collection.</p>
-        </div>
-        <div class="feature-item">
-          <div class="fi-icon">💰</div>
-          <h3>Price & Compare Price</h3>
-          <p>Extract current selling price and compare-at price (original MRP) to calculate discount percentage.</p>
-        </div>
-        <div class="feature-item">
-          <div class="fi-icon">🎨</div>
-          <h3>Variants (Size, Color, etc.)</h3>
-          <p>Extract all product variants including size, color, material with their individual prices and SKUs.</p>
-        </div>
-        <div class="feature-item">
-          <div class="fi-icon">🖼️</div>
-          <h3>Product Images</h3>
-          <p>Get all product image URLs at full resolution for every item in the collection.</p>
-        </div>
-        <div class="feature-item">
-          <div class="fi-icon">📦</div>
-          <h3>Inventory & SKU</h3>
-          <p>Extract SKU codes, inventory quantity, and fulfillment type for each product variant.</p>
-        </div>
-        <div class="feature-item">
-          <div class="fi-icon">🔖</div>
-          <h3>Tags & Vendor</h3>
-          <p>Get product tags, vendor name, and product type metadata for filtering and categorization.</p>
-        </div>
-      </div>
-
-      <h2 class="section-heading">Sample JSON Output (Shopify Collection)</h2>
-      <div class="json-demo">
-        <span class="jk">{</span><br>
-        &nbsp;&nbsp;<span class="jk">"title"</span>: <span class="js">"Classic Cotton T-Shirt"</span>,<br>
-        &nbsp;&nbsp;<span class="jk">"handle"</span>: <span class="js">"classic-cotton-t-shirt"</span>,<br>
-        &nbsp;&nbsp;<span class="jk">"vendor"</span>: <span class="js">"Urban Brand"</span>,<br>
-        &nbsp;&nbsp;<span class="jk">"price"</span>: <span class="js">"$24.99"</span>,<br>
-        &nbsp;&nbsp;<span class="jk">"compare_at_price"</span>: <span class="js">"$39.99"</span>,<br>
-        &nbsp;&nbsp;<span class="jk">"variants"</span>: [<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">{ "title"</span>: <span class="js">"Small / Red"</span>, <span class="jk">"sku"</span>: <span class="js">"TSH-S-RED"</span>, <span class="jk">"price"</span>: <span class="jn">24.99</span> <span class="jk">}</span>,<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">{ "title"</span>: <span class="js">"Medium / Blue"</span>, <span class="jk">"sku"</span>: <span class="js">"TSH-M-BLU"</span>, <span class="jk">"price"</span>: <span class="jn">24.99</span> <span class="jk">}</span><br>
-        &nbsp;&nbsp;],<br>
-        &nbsp;&nbsp;<span class="jk">"images"</span>: [<span class="js">"https://cdn.shopify.com/s/files/..."</span>],<br>
-        &nbsp;&nbsp;<span class="jk">"tags"</span>: [<span class="js">"cotton"</span>, <span class="js">"summer"</span>, <span class="js">"casual"</span>]<br>
-        <span class="jk">}</span>
-      </div>
-
-      <h2 class="section-heading">How to Scrape a Shopify Collection in 3 Steps</h2>
-      <ol class="steps-list">
-        <li>
-          <div>
-            <strong>Open any Shopify collection page</strong>
-            <p>Navigate to a collection like <code style="color:#fb923c">https://yourstore.myshopify.com/collections/all</code> or any product category URL.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0c10" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Scrapify" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>
+      Shopify Collection Product Scraper to JSON | Free Online | Scrapify
+    </title>
+    <meta
+      name="description"
+      content="Scrape any Shopify collection or product listing page to JSON free. Extract all product titles, prices, variants, images and SKUs from Shopify store collections instantly."
+    />
+    <meta
+      name="keywords"
+      content="shopify product scraper, shopify collection scraper, extract shopify products json, shopify store data extractor, shopify catalog scraper, shopify product list json free"
+    />
+    <meta name="author" content="Scrapify" />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://scrapifyapp-milon.netlify.app/shopify-collection-scraper.html"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://scrapifyapp-milon.netlify.app/shopify-collection-scraper.html"
+    />
+    <meta
+      property="og:title"
+      content="Shopify Collection Product Scraper to JSON | Scrapify"
+    />
+    <meta
+      property="og:description"
+      content="Extract all Shopify collection products including variants, prices, and images into clean JSON free online."
+    />
+    <meta
+      property="og:image"
+      content="https://scrapifyapp-milon.netlify.app/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Scrapify" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Shopify Collection Product Scraper to JSON | Scrapify"
+    />
+    <meta
+      name="twitter:description"
+      content="Extract all Shopify collection products including variants, prices, and images into clean JSON free online."
+    />
+    <meta
+      name="twitter:image"
+      content="https://scrapifyapp-milon.netlify.app/og-image.jpg"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      as="style"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Scrapify Shopify Collection Scraper",
+        "url": "https://scrapifyapp-milon.netlify.app/shopify-collection-scraper.html",
+        "description": "Free online Shopify product and collection scraper. Extracts product listings, variants, images, and prices into JSON or CSV without coding.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I scrape Shopify collections to JSON?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Paste any Shopify collection URL (e.g. https://yourstore.com/collections/all) into Scrapify, select Category Listing mode, and click Scrapify Now. Scrapify auto-detects Shopify stores and uses the built-in products.json endpoint for maximum accuracy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What data can I extract from Shopify collections?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Scrapify extracts product title, handle, vendor, selling price, compare-at price, all variants (size, color, SKU), product images, tags, and product type for every item in the collection."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I download Shopify product data as CSV?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. After scraping a Shopify collection, click Export Products CSV to download all product data into a spreadsheet."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Scrape a Shopify Collection to JSON",
+        "description": "Extract all products from any Shopify collection in three simple steps using Scrapify.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Open any Shopify collection page",
+            "text": "Navigate to a collection such as https://yourstore.myshopify.com/collections/all or any product category URL."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Paste URL into Scrapify, select Category Listing mode",
+            "text": "Scrapify auto-detects Shopify stores and uses the built-in /products.json endpoint for maximum accuracy."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Download or export your product data",
+            "text": "Download as JSON or export as CSV to import into Google Sheets, Excel, or your own database."
+          }
+        ]
+      }
+    </script>
+    <style>
+      .lp-hero {
+        background: linear-gradient(
+          135deg,
+          rgba(249, 115, 22, 0.12) 0%,
+          rgba(239, 68, 68, 0.06) 100%
+        );
+        border: 1px solid rgba(249, 115, 22, 0.2);
+        border-radius: 20px;
+        padding: 48px 40px;
+        margin-bottom: 32px;
+        text-align: center;
+      }
+      .lp-hero h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+      .lp-hero h1 span {
+        color: #fb923c;
+      }
+      .lp-hero p {
+        color: #a0aec0;
+        font-size: 1.1rem;
+        max-width: 620px;
+        margin: 0 auto 28px;
+      }
+      .lp-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: #fff;
+        font-weight: 700;
+        padding: 14px 32px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .lp-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        margin: 32px 0;
+      }
+      .feature-item {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 24px;
+      }
+      .feature-item .fi-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+      }
+      .feature-item .fi-icon svg {
+        width: 32px;
+        height: 32px;
+        color: #fb923c;
+      }
+      .feature-item h3 {
+        color: #e2e8f0;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .feature-item p {
+        color: #718096;
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+      .json-demo {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(249, 115, 22, 0.2);
+        border-radius: 14px;
+        padding: 24px;
+        font-family: "Fira Code", monospace;
+        font-size: 0.82rem;
+        color: #e2e8f0;
+        overflow-x: auto;
+        margin: 24px 0;
+      }
+      .json-demo .jk {
+        color: #79c0ff;
+      }
+      .json-demo .js {
+        color: #56d364;
+      }
+      .json-demo .jn {
+        color: #fb923c;
+      }
+      .steps-list {
+        list-style: none;
+        padding: 0;
+        counter-reset: steps;
+      }
+      .steps-list li {
+        counter-increment: steps;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 18px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .steps-list li::before {
+        content: counter(steps);
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.85rem;
+        min-width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2px;
+      }
+      .steps-list li p {
+        color: #a0aec0;
+        margin: 0;
+        font-size: 0.9rem;
+      }
+      .steps-list li strong {
+        color: #e2e8f0;
+        display: block;
+        margin-bottom: 4px;
+      }
+      .breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+        font-size: 0.85rem;
+        color: #718096;
+      }
+      .breadcrumb a {
+        color: #60a5fa;
+        text-decoration: none;
+      }
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      .section-heading {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #e2e8f0;
+        margin: 40px 0 20px;
+      }
+      .tip-box {
+        background: rgba(249, 115, 22, 0.08);
+        border: 1px solid rgba(249, 115, 22, 0.25);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin: 24px 0;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .tip-box .tip-icon {
+        font-size: 1.4rem;
+        margin-top: 2px;
+        display: flex;
+        align-items: center;
+      }
+      .tip-box .tip-icon svg {
+        width: 24px;
+        height: 24px;
+        color: #fb923c;
+      }
+      .tip-box p {
+        color: #a0aec0;
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+      .tip-box strong {
+        color: #fb923c;
+      }
+      .related-tools {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin: 24px 0;
+      }
+      .related-tool {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 20px;
+        text-decoration: none;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .related-tool:hover {
+        border-color: rgba(249, 115, 22, 0.5);
+        transform: translateY(-2px);
+      }
+      .related-tool h4 {
+        color: #e2e8f0;
+        font-size: 0.95rem;
+        margin-bottom: 6px;
+      }
+      .related-tool p {
+        color: #718096;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+      .related-tool-svg {
+        color: #fb923c;
+        margin-bottom: 10px;
+        max-width: 26px;
+        max-height: 26px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="app-header">
+        <div class="brand">
+          <div class="logo-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+              <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+              <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path>
+            </svg>
           </div>
-        </li>
-        <li>
           <div>
-            <strong>Paste URL into Scrapify, select Category Listing mode</strong>
-            <p>Scrapify auto-detects Shopify stores and uses the built-in <code>/products.json</code> endpoint for maximum accuracy.</p>
+            <h1>Scrapify <span>Data Collector</span></h1>
+            <p class="tagline">Universal Web Scraper & JSON Extractor</p>
           </div>
-        </li>
-        <li>
-          <div>
-            <strong>Download or export your product data</strong>
-            <p>Download as JSON or export as CSV to import into Google Sheets, Excel, or your own database.</p>
-          </div>
-        </li>
-      </ol>
+        </div>
+        <a href="/" class="btn btn-secondary btn-sm">← Back to Scrapify</a>
+      </header>
 
-      <div style="text-align:center; margin: 48px 0;">
-        <a href="/" class="lp-cta">🚀 Scrape Shopify Collection Free →</a>
-      </div>
-    </main>
-  </div>
-</body>
+      <main class="main-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a> <span>›</span>
+          <span>Shopify Collection Scraper</span>
+        </nav>
+
+        <div class="lp-hero">
+          <h1>Free <span>Shopify Collection</span> Product Scraper</h1>
+          <p>
+            Extract all products from any Shopify collection or catalog page
+            into clean, structured JSON. Get product names, prices, variants,
+            SKUs, and images — instantly, for free.
+          </p>
+          <a href="/" class="lp-cta">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            Try Shopify Scraper Free →
+          </a>
+        </div>
+
+        <div class="tip-box">
+          <div class="tip-icon">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+              />
+              <path d="M9 18h6" />
+              <path d="M10 22h4" />
+            </svg>
+          </div>
+          <p>
+            <strong>Pro Tip:</strong> Most Shopify stores expose a built-in JSON
+            endpoint at <code>/collections/[name]/products.json</code>. Scrapify
+            auto-detects and uses this for maximum data extraction accuracy when
+            available.
+          </p>
+        </div>
+
+        <h2 class="section-heading">
+          What Data Gets Extracted from Shopify Collections?
+        </h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="fi-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"
+                />
+                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+              </svg>
+            </div>
+            <h3>Product Title & Handle</h3>
+            <p>
+              Get the full product name and URL-safe handle (slug) for every
+              product in the Shopify collection.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="12" y1="2" x2="12" y2="22" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3>Price & Compare Price</h3>
+            <p>
+              Extract current selling price and compare-at price (original MRP)
+              to calculate discount percentage.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+                <path
+                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+                />
+              </svg>
+            </div>
+            <h3>Variants (Size, Color, etc.)</h3>
+            <p>
+              Extract all product variants including size, color, material with
+              their individual prices and SKUs.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                <circle cx="9" cy="9" r="2" />
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+              </svg>
+            </div>
+            <h3>Product Images</h3>
+            <p>
+              Get all product image URLs at full resolution for every item in
+              the collection.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M7.5 4.27 16.5 9.42" />
+                <path
+                  d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
+                />
+                <path d="m3.3 7 8.7 5 8.7-5" />
+                <path d="M12 22V12" />
+              </svg>
+            </div>
+            <h3>Inventory & SKU</h3>
+            <p>
+              Extract SKU codes, inventory quantity, and fulfillment type for
+              each product variant.
+            </p>
+          </div>
+          <div class="feature-item">
+            <div class="fi-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+              </svg>
+            </div>
+            <h3>Tags & Vendor</h3>
+            <p>
+              Get product tags, vendor name, and product type metadata for
+              filtering and categorization.
+            </p>
+          </div>
+        </div>
+
+        <h2 class="section-heading">Sample JSON Output (Shopify Collection)</h2>
+        <div class="json-demo">
+          <span class="jk">{</span><br />
+          &nbsp;&nbsp;<span class="jk">"title"</span>:
+          <span class="js">"Classic Cotton T-Shirt"</span>,<br />
+          &nbsp;&nbsp;<span class="jk">"handle"</span>:
+          <span class="js">"classic-cotton-t-shirt"</span>,<br />
+          &nbsp;&nbsp;<span class="jk">"vendor"</span>:
+          <span class="js">"Urban Brand"</span>,<br />
+          &nbsp;&nbsp;<span class="jk">"price"</span>:
+          <span class="js">"$24.99"</span>,<br />
+          &nbsp;&nbsp;<span class="jk">"compare_at_price"</span>:
+          <span class="js">"$39.99"</span>,<br />
+          &nbsp;&nbsp;<span class="jk">"variants"</span>: [<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">{ "title"</span>:
+          <span class="js">"Small / Red"</span>, <span class="jk">"sku"</span>:
+          <span class="js">"TSH-S-RED"</span>, <span class="jk">"price"</span>:
+          <span class="jn">24.99</span> <span class="jk">}</span>,<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="jk">{ "title"</span>:
+          <span class="js">"Medium / Blue"</span>,
+          <span class="jk">"sku"</span>: <span class="js">"TSH-M-BLU"</span>,
+          <span class="jk">"price"</span>: <span class="jn">24.99</span>
+          <span class="jk">}</span><br />
+          &nbsp;&nbsp;],<br />
+          &nbsp;&nbsp;<span class="jk">"images"</span>: [<span class="js"
+            >"https://cdn.shopify.com/s/files/..."</span
+          >],<br />
+          &nbsp;&nbsp;<span class="jk">"tags"</span>: [<span class="js"
+            >"cotton"</span
+          >, <span class="js">"summer"</span>,
+          <span class="js">"casual"</span>]<br />
+          <span class="jk">}</span>
+        </div>
+
+        <h2 class="section-heading">
+          How to Scrape a Shopify Collection in 3 Steps
+        </h2>
+        <ol class="steps-list">
+          <li>
+            <div>
+              <strong>Open any Shopify collection page</strong>
+              <p>
+                Navigate to a collection like
+                <code style="color: #fb923c"
+                  >https://yourstore.myshopify.com/collections/all</code
+                >
+                or any product category URL.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong
+                >Paste URL into Scrapify, select Category Listing mode</strong
+              >
+              <p>
+                Scrapify auto-detects Shopify stores and uses the built-in
+                <code>/products.json</code> endpoint for maximum accuracy.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong>Download or export your product data</strong>
+              <p>
+                Download as JSON or export as CSV to import into Google Sheets,
+                Excel, or your own database.
+              </p>
+            </div>
+          </li>
+        </ol>
+
+        <!-- Related Tools / Internal Linking -->
+        <h2 class="section-heading">Related Free Tools</h2>
+        <div class="related-tools">
+          <a href="/" class="related-tool">
+            <svg
+              class="related-tool-svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+            <h4>Scrapify Main Tool</h4>
+            <p>Paste any URL to extract structured JSON from any website.</p>
+          </a>
+          <a href="/amazon-product-scraper.html" class="related-tool">
+            <svg
+              class="related-tool-svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="2" x2="12" y2="22" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+            <h4>Amazon Product Scraper</h4>
+            <p>Extract ASIN, title, price, ratings, and specs from Amazon.</p>
+          </a>
+          <a href="/arogga-medicine-scraper.html" class="related-tool">
+            <svg
+              class="related-tool-svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M10.5 20.5 3.5 13.5a4.95 4.95 0 1 1 7-7l7 7a4.95 4.95 0 1 1-7 7Z"
+              />
+              <path d="m8.5 8.5 7 7" />
+            </svg>
+            <h4>Arogga Medicine Scraper</h4>
+            <p>
+              Extract Arogga medicine listings with names, prices, and brands.
+            </p>
+          </a>
+          <a href="/html-table-to-json.html" class="related-tool">
+            <svg
+              class="related-tool-svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="8" y1="6" x2="21" y2="6" />
+              <line x1="8" y1="12" x2="21" y2="12" />
+              <line x1="8" y1="18" x2="21" y2="18" />
+              <line x1="3" y1="6" x2="3.01" y2="6" />
+              <line x1="3" y1="12" x2="3.01" y2="12" />
+              <line x1="3" y1="18" x2="3.01" y2="18" />
+            </svg>
+            <h4>HTML Table to JSON</h4>
+            <p>
+              Convert any HTML table on the web into clean JSON arrays or CSV.
+            </p>
+          </a>
+        </div>
+
+        <div style="text-align: center; margin: 48px 0">
+          <a href="/" class="lp-cta">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+              />
+              <path
+                d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+              />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+            </svg>
+            Scrape Shopify Collection Free →
+          </a>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>

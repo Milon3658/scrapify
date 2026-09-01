@@ -415,3 +415,39 @@ body {
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* Icon support for SVG-in-markup UI elements (SEO & a11y improvements) */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pill-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.usecase-icon svg {
+  width: 34px;
+  height: 34px;
+  color: var(--accent-cyan);
+}
+
+.tool-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.tool-link:hover {
+  border-color: var(--accent-cyan);
+}
+
+.tool-link h3 {
+  color: var(--text-primary);
+}
+
+.tool-link p {
+  color: var(--text-secondary);
+}
